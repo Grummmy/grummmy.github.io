@@ -1,0 +1,130 @@
+:root {
+  --bg: #000;
+  --text: #fff;
+  --primary: #1e90ff;
+  --danger: #e63946;
+  --radius: 6px;
+  --font: "Sofia Sans"
+}
+
+/* ...existing code... */
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font)
+}
+
+/* ...existing code... */
+
+.neon-red {
+  color: #da283d;
+  text-shadow: 0 0 5px #ad1d2e, 0 0 10px #ad1d2e, 0 0 20px #ad1d2e;
+}
+
+/* ...existing code... */
+
+.neon-blue {
+  color: #1dad9c;
+  text-shadow: 0 0 5px #1dad9c, 0 0 10px #1dad9c, 0 0 20px #1dad9c;
+}
+
+/* NEW: neon LGP logo styles */
+.logo {
+  display: flex;
+  gap: 0.25em;
+  justify-content: center;
+  align-items: center;
+  margin: 3.5rem 0;
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  perspective: 800px;
+  user-select: none;
+}
+
+.logo .letter {
+  display: inline-block;
+  position: relative;
+  padding: 0 0.06em;
+  transform-origin: center;
+  -webkit-font-smoothing: antialiased;
+  will-change: transform, filter, opacity;
+  animation: neonPulse 3.2s ease-in-out infinite alternate;
+}
+
+/* individual color + layered glows */
+.logo .l {
+  color: #ff5d7a;
+  text-shadow:
+    0 0 6px #ff8aa3,
+    0 0 18px #ff5d7a,
+    0 0 36px #ff2d55,
+    0 0 80px rgba(255,45,85,0.35);
+}
+.logo .g {
+  color: #7ef56a;
+  text-shadow:
+    0 0 6px #b9ffb6,
+    0 0 18px #7ef56a,
+    0 0 36px #42d930,
+    0 0 80px rgba(46,217,71,0.25);
+}
+.logo .p {
+  color: #4fe0df;
+  text-shadow:
+    0 0 6px #aef7f5,
+    0 0 18px #4fe0df,
+    0 0 36px #12c6c0,
+    0 0 80px rgba(31,199,190,0.28);
+}
+
+/* soft outer glow using pseudo-element */
+.logo .letter::after {
+  content: "";
+  position: absolute;
+  inset: -0.5rem;
+  border-radius: 0.35rem;
+  z-index: -1;
+  opacity: 0.9;
+  filter: blur(18px);
+  pointer-events: none;
+}
+.logo .l::after { background: radial-gradient(closest-side, rgba(255,93,122,0.35), transparent 55%); }
+.logo .g::after { background: radial-gradient(closest-side, rgba(126,245,106,0.28), transparent 55%); }
+.logo .p::after { background: radial-gradient(closest-side, rgba(79,224,223,0.30), transparent 55%); }
+
+/* subtle 3D tilt + flicker to feel alive */
+@keyframes neonPulse {
+  0%   { transform: translateZ(0) rotateX(3deg); filter: brightness(1); opacity: 1; }
+  30%  { transform: translateZ(6px) rotateX(3deg); filter: brightness(1.15); opacity: 1; }
+  60%  { transform: translateZ(2px) rotateX(1.5deg); filter: brightness(1.05); opacity: 0.98; }
+  100% { transform: translateZ(0) rotateX(3deg); filter: brightness(1); opacity: 1; }
+}
+
+/* randomized quick flicker to emulate neon imperfections */
+@keyframes neonFlicker {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 12px rgba(255,255,255,0.05)); }
+  5%  { opacity: 0.92; transform: translateY(-1px) }
+  8%  { opacity: 0.98; transform: translateY(0) }
+  12% { opacity: 0.9; }
+  14% { opacity: 1; }
+  20% { opacity: 0.95; transform: translateY(-0.5px) }
+}
+
+/* occasionally apply a quick flicker to each letter at different offsets */
+.logo .l { animation: neonPulse 3.2s ease-in-out infinite alternate, neonFlicker 6s linear infinite; animation-delay: 0s, 0s; }
+.logo .g { animation: neonPulse 3.2s ease-in-out infinite alternate, neonFlicker 6s linear infinite; animation-delay: 0.1s, 0.5s; }
+.logo .p { animation: neonPulse 3.2s ease-in-out infinite alternate, neonFlicker 6s linear infinite; animation-delay: 0.2s, 1s; }
+
+/* accessibility: ensure good contrast for smaller sizes */
+@media (max-width: 600px) {
+  .logo { margin: 2.4rem 0; }
+  .logo .letter::after { inset: -0.35rem; filter: blur(12px); opacity: 0.75; }
+}
+
+.fancy-text {
+  color: #fff;
+  font-family: var(--font);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.3);
+}
