@@ -118,10 +118,10 @@ body {
 .logo .p { animation: neonPulse 3.2s ease-in-out infinite alternate, neonFlicker 6s linear infinite; animation-delay: 0.2s, 1s; }
 
 /* accessibility: ensure good contrast for smaller sizes */
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .logo { margin: 2.4rem 0; }
   .logo .letter::after { inset: -0.35rem; filter: blur(12px); opacity: 0.75; }
-}
+} */
 
 .fancy-text {
   color: #fff;
