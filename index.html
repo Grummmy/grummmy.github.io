@@ -10,8 +10,19 @@
     <span class="letter p">P</span>
   </h1>
 
+  <p class="fancy-text" style="font-size: xx-large; text-align-last: center;">sooooomee<br>realllllllly<br>base teeeeeeeeeexttttt<br><br><br><br></p>
+  <p class="fancy-text" id="greeting" style="font-size: xx-large; text-align-last: center;"></p>
 
-  <p class="fancy-text" style="font-size: xx-large; text-align-last: center;">sooo1oomee<br>realllllllly<br>base teeeeeeeeeexttttt</p>
-  <legend>
+  <script>
+    const userLang = navigator.language || navigator.userLanguage; 
+    const greetingEl = document.getElementById('greeting');
+
+    if (userLang.startsWith('ru')) {
+      greetingEl.textContent = "Привет!";
+    } else {
+      greetingEl.textContent = "Hello!";
+    }
+    greetingEl.textContent += ` and u use: ${userLang}`
+  </script>
 </body>
 </html>
